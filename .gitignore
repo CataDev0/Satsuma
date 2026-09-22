@@ -1,0 +1,16 @@
+# Secrets
+.env
+
+# .NET build output
+bin/
+obj/
+
+# Node
+node_modules/
+dist/
+
+# IDE and local tooling state
+.vs/
+.idea/
+*.user
+.claude/settings.local.json

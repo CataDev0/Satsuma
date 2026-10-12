@@ -1,24 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using Satsuma.Api.Models;
+using Satsuma.Api.Services;
 
 namespace Satsuma.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class Maintenance : ControllerBase
+public class Maintenance(MaintenanceService maintenance) : ControllerBase
 {
-    private string? Make { get; set; }
-    private string? Model { get; set; }
-    private string? Year { get; set; }
-    private string? Color { get; set; }
-    private string? Vin { get; set; }
-
     [HttpGet(Name = "GetMaintenance")]
-    internal MaintenanceData Get()
+    public async Task<ActionResult<MaintenanceData>> Get(CancellationToken cancellationToken)
     {
-        return new MaintenanceData
-            {
-                DrivenDistance = 10000,
-            };
+        return await maintenance.GetSummaryAsync(cancellationToken);
     }
 }

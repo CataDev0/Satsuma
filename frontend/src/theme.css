@@ -1,0 +1,128 @@
+/* ==========================================================================
+   Satsuma theme
+   --------------------------------------------------------------------------
+   This is the file to edit if you want to re-skin the app. Nothing else
+   hard-codes a colour, so changes here land everywhere at once.
+
+   How it works: every token below is a Tailwind v4 theme variable, so it
+   generates real utility classes named after it —
+
+     --color-brand-500   ->  bg-brand-500   text-brand-500   border-brand-500
+     --radius-card       ->  rounded-card
+     --shadow-card       ->  shadow-card
+     --spacing-gutter    ->  p-gutter       gap-gutter
+     --font-display      ->  font-display
+
+   Switching modes: every colour below is written as light-dark(light, dark)
+   and resolves against the element's `color-scheme`. The rules at the bottom
+   of this file set that from an optional .light / .dark class on <html> —
+   applied by the toggle in ThemeToggle.tsx, or by the pre-paint script in
+   index.html — and with no class at all it follows the OS. One value per
+   colour therefore covers both modes, and a third state, "system", comes
+   free.
+
+   Shadow utilities are the exception. Tailwind bakes the value of a
+   --shadow-* token straight into the compiled `.shadow-card` rule (it has to,
+   so shadow colour utilities can compose with it), and a shadow is not a
+   colour, so light-dark() can't reach it. Edit --shadow-card if you want a
+   different one, but expect it to look the same in both modes — hence the
+   borders doing the separating work on dark backgrounds.
+   ========================================================================== */
+
+/* Makes Tailwind's own `dark:` variant follow the same class, so a one-off
+   `dark:bg-black` in a component agrees with the tokens. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* --- 1. Brand ramp ------------------------------------------------------
+     The one knob most people will want. Swap these nine values for your own
+     palette and the accents, buttons and focus rings follow. */
+  --color-brand-50: #fffbea;
+  --color-brand-100: #fff3c4;
+  --color-brand-200: #fce588;
+  --color-brand-300: #fadb5f;
+  --color-brand-400: #f7c948;
+  --color-brand-500: #f0b429;
+  --color-brand-600: #de911d;
+  --color-brand-700: #cb6e17;
+  --color-brand-800: #b44d12;
+  --color-brand-900: #8d2b0b;
+
+  /* --- 2. Surfaces & ink --------------------------------------------------
+     Semantic names, not literal ones: "surface" is the card background in
+     whichever mode you are in. Use these in components so dark mode keeps
+     working. */
+  --color-canvas: light-dark(#f7f6f3, #131211);
+  --color-surface: light-dark(#ffffff, #1c1a18);
+  --color-surface-sunken: light-dark(#f1efea, #242220);
+  --color-line: light-dark(#e4e0d8, #332f2b);
+  --color-ink: light-dark(#1c1a17, #f5f3ef);
+  --color-ink-muted: light-dark(#5c574e, #a8a29a);
+  --color-ink-subtle: light-dark(#8b857a, #7a746b);
+
+  /* Backdrop behind a native <dialog>, styled below. */
+  --color-scrim: light-dark(rgb(28 26 23 / 0.45), rgb(0 0 0 / 0.7));
+
+  /* --- 3. Shape & depth ------------------------------------------------- */
+  --radius-card: 1rem;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 2px rgb(28 26 23 / 0.04), 0 12px 28px -18px rgb(28 26 23 / 0.35);
+
+  /* --- 4. Spacing --------------------------------------------------------
+     A named step or two keeps page rhythm consistent. Gutters and section
+     gaps are here so the whole layout loosens or tightens from one place. */
+  --spacing-gutter: 1.5rem;
+  --spacing-section: 2.5rem;
+
+  /* --- 5. Type ----------------------------------------------------------- */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Consolas, monospace;
+}
+
+/* --- Per-car accent ------------------------------------------------------
+   A component sets --accent on a wrapper (see CarPage/carColor.ts, which
+   reads the car's Colour field), and these helpers mix it with whatever
+   surface is behind it. Mixing rather than pairing a hand-picked light and
+   dark variant means a new car colour can never produce unreadable text. */
+.accent-dot {
+  background-color: var(--accent);
+}
+
+.accent-soft {
+  background-color: color-mix(in oklab, var(--accent) 16%, transparent);
+  color: color-mix(in oklab, var(--accent) 70%, var(--color-ink));
+}
+
+.accent-rule {
+  border-color: color-mix(in oklab, var(--accent) 35%, transparent);
+}
+
+.accent-glow {
+  background-image: radial-gradient(
+    115% 80% at 50% 0%,
+    color-mix(in oklab, var(--accent) 20%, transparent) 0%,
+    transparent 72%
+  );
+}
+
+/* --- Modal scrim ---------------------------------------------------------
+   The backdrop of any native <dialog>. Tailwind v4 has no ::backdrop variant,
+   so this cannot be written as a utility class — a `backdrop:bg-*` in a
+   component is silently dropped. The --color-scrim token above keeps it in
+   the same re-skin surface as the rest of the palette. */
+dialog::backdrop {
+  background-color: var(--color-scrim);
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+:root.light {
+  color-scheme: light;
+}
+
+:root.dark {
+  color-scheme: dark;
+}

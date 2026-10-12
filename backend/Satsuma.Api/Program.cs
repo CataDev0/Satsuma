@@ -1,16 +1,22 @@
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
-using Satsuma.Api.Models;
+using Satsuma.Api.Data;
+using Satsuma.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
 builder.Services.AddOpenApi();
 
 builder.Services.AddDbContext<SatsumaDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Default") ?? throw new InvalidOperationException("Connection string 'SatsumaDbContext' not found.")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Default") ?? throw new InvalidOperationException("Connection string 'Default' not found.")));
+
+builder.Services.AddScoped<CarService>();
 
 var app = builder.Build();
 
@@ -18,15 +24,13 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
-}
 
-var tires = new Tires("Tires", Part.PartCondition.New, Part.Side.None)
-{
-    PartNumber = "123456789",
-    Description = "Hankook Ventus S1 Evo3 K127 245/35R19 93Y XL",
-    Price = 199,
-    Quantity = 4
-};
+    if (!EF.IsDesignTime)
+    {
+        using var scope = app.Services.CreateScope();
+        await DbSeeder.SeedAsync(scope.ServiceProvider.GetRequiredService<SatsumaDbContext>());
+    }
+}
 
 app.UseHttpsRedirection();
 
@@ -35,10 +39,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-internal class SatsumaDbContext : DbContext
-{
-    public SatsumaDbContext(DbContextOptions<SatsumaDbContext> options) : base(options)
-    {
-    }
-}

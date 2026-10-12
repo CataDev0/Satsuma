@@ -1,6 +1,11 @@
 @Satsuma.Api_HostAddress = http://localhost:5277
 
-GET {{Satsuma.Api_HostAddress}}/weatherforecast/
+GET {{Satsuma.Api_HostAddress}}/Maintenance
+Accept: application/json
+
+###
+
+GET {{Satsuma.Api_HostAddress}}/Car
 Accept: application/json
 
 ###

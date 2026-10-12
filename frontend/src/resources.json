@@ -1,0 +1,115 @@
+{
+  "en-US": {
+    "resources": [
+      {
+        "name": "NHTSA VIN Decoder",
+        "url": "https://vpic.nhtsa.dot.gov/decoder/",
+        "icon": "https://www.google.com/s2/favicons?domain=nhtsa.gov&sz=64"
+      },
+      {
+        "name": "RockAuto",
+        "url": "https://www.rockauto.com/",
+        "icon": "https://www.google.com/s2/favicons?domain=rockauto.com&sz=64"
+      }
+    ]
+  },
+  "ja-JP": {
+    "resources": [
+      {
+        "name": "JAF（日本自動車連盟）",
+        "url": "https://jaf.or.jp/",
+        "icon": "https://www.google.com/s2/favicons?domain=jaf.or.jp&sz=64"
+      },
+      {
+        "name": "モノタロウ",
+        "url": "https://www.monotaro.com/",
+        "icon": "https://www.google.com/s2/favicons?domain=monotaro.com&sz=64"
+      }
+    ]
+  },
+  "en-GB": {
+    "resources": [
+      {
+        "name": "DVLA – Get vehicle information",
+        "url": "https://www.gov.uk/get-vehicle-information-from-dvla",
+        "icon": "https://www.google.com/s2/favicons?domain=gov.uk&sz=64"
+      },
+      {
+        "name": "Euro Car Parts",
+        "url": "https://www.eurocarparts.com/",
+        "icon": "https://www.google.com/s2/favicons?domain=eurocarparts.com&sz=64"
+      }
+    ]
+  },
+  "es-ES": {
+    "resources": [
+      {
+        "name": "DGT – Dirección General de Tráfico",
+        "url": "https://www.dgt.es/",
+        "icon": "https://www.google.com/s2/favicons?domain=dgt.es&sz=64"
+      },
+      {
+        "name": "Oscaro",
+        "url": "https://www.oscaro.es/",
+        "icon": "https://www.google.com/s2/favicons?domain=oscaro.es&sz=64"
+      }
+    ]
+  },
+  "fr-FR": {
+    "resources": [
+      {
+        "name": "ANTS – Immatriculation des véhicules",
+        "url": "https://ants.gouv.fr/",
+        "icon": "https://www.google.com/s2/favicons?domain=ants.gouv.fr&sz=64"
+      },
+      {
+        "name": "Oscaro",
+        "url": "https://www.oscaro.com/",
+        "icon": "https://www.google.com/s2/favicons?domain=oscaro.com&sz=64"
+      }
+    ]
+  },
+  "de-DE": {
+    "resources": [
+      {
+        "name": "KBA – Kraftfahrt-Bundesamt",
+        "url": "https://www.kba.de/",
+        "icon": "https://www.google.com/s2/favicons?domain=kba.de&sz=64"
+      },
+      {
+        "name": "Autodoc",
+        "url": "https://www.autodoc.de/",
+        "icon": "https://www.google.com/s2/favicons?domain=autodoc.de&sz=64"
+      }
+    ]
+  },
+  "no-NO": {
+    "resources": [
+      {
+        "name": "Vegvesenet - Mine Kjøretøy",
+        "url": "https://www.vegvesen.no/dinside/minekjoretoy/kjoretoy",
+        "icon": "https://www.google.com/s2/favicons?domain=vegvesen.no&sz=64"
+      },
+      {
+        "name": "Eurodel",
+        "url": "https://www.eurodel.no/",
+        "icon": "https://www.google.com/s2/favicons?domain=eurodel.no&sz=64"
+      }
+    ]
+  },
+  "sv-SE": {
+    "resources": [
+      {
+        "name": "Transportstyrelsen",
+        "url": "https://www.transportstyrelsen.se/",
+        "icon": "https://www.google.com/s2/favicons?domain=transportstyrelsen.se&sz=64"
+      },
+      {
+        "name": "Mekonomen",
+        "url": "https://www.mekonomen.se/",
+        "icon": "https://www.google.com/s2/favicons?domain=mekonomen.se&sz=64"
+      }
+    ]
+  },
+  "$schema": "./resources.schema.json"
+}

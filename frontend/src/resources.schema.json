@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Satsuma resource links",
+  "description": "Per-nation car resources rendered in the 'Useful Resources' panel on the home page. Referenced from resources.json via a relative $schema path, so editors validate and autocomplete that file as you type.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Editor hint only. Not read by the app."
+    }
+  },
+  "patternProperties": {
+    "^[a-z]{2,3}-([A-Z][A-Z]+|[0-9]{3})$": {
+      "$ref": "#/definitions/localeBlock",
+      "description": "BCP-47 locale key in the form produced by localeKey() in resources.ts: lowercase language, then a title-cased region."
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "localeBlock": {
+      "type": "object",
+      "properties": {
+        "resources": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/definitions/resource" }
+        }
+      },
+      "required": ["resources"],
+      "additionalProperties": false
+    },
+    "resource": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Text shown on the link. The only user-visible string here, so translate it for the locale."
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https://",
+          "description": "Where the link goes. https only — one of these opens a third-party site."
+        },
+        "icon": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Absolute https URL, or a path under /public such as /icons/foo.svg."
+        }
+      },
+      "required": ["name", "url", "icon"],
+      "additionalProperties": false
+    }
+  }
+}

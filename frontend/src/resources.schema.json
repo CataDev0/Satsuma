@@ -48,7 +48,7 @@
           "description": "Absolute https URL, or a path under /public such as /icons/foo.svg."
         }
       },
-      "required": ["name", "url", "icon"],
+      "required": ["name", "url"],
       "additionalProperties": false
     }
   }

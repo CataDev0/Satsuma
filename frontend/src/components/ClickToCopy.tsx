@@ -2,12 +2,13 @@ import { useState } from "react"
 
 export function ClickToCopy({ text }: { text: string }) {
   const [copied, setCopied] = useState(false)
-
+  let copyable = text.length > 2;
+  
   return (
     <button
-      title="Click to copy"
-      aria-label="Click to copy"
-      className="cursor-pointer px-2 py-1 text-sm font-mono text-ink-muted transition-colors hover:bg-surface-hover hover:text-ink"
+      title={copyable ? "Click to copy" : ""}
+      aria-label={copyable ? "Click to copy" : ""}
+      className={`${copyable ? "cursor-pointer" : ""} px-2 py-1 text-sm font-mono text-ink-muted transition-colors hover:bg-surface-hover hover:text-ink`}
       onClick={() => {
         navigator.clipboard.writeText(text)
         setCopied(true)
@@ -15,9 +16,14 @@ export function ClickToCopy({ text }: { text: string }) {
       }}
     >
       {text}
-      <span className="inline-flex items-center gap-2 text-sm text-ink-muted transition-colors hover:text-ink">
-        {copied ? <CheckIcon /> : <CopyIcon />}
-      </span>
+      {copyable &&
+        <span className="inline-flex items-center gap-2 text-sm text-ink-muted transition-colors hover:text-ink">
+          {copied
+            ? <CheckIcon />
+            : <CopyIcon />
+          }
+        </span>
+      }
     </button>
   )
 }

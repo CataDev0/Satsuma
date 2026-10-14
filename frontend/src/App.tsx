@@ -57,14 +57,12 @@ function App() {
               {error}
             </p>
           )}
+          <h2 className="mb-gutter text-left">Garage</h2>
+          <div className="mb-gutter flex justify-end">
+            <AddCarButton onCreated={(car) => setCars((cars) => [...cars, car])} />
+          </div>
           {carsState.length > 0 && (
-            <>
-              <h2 className="mb-gutter text-left">Garage</h2>
-              <div className="mb-gutter flex justify-end">
-                <AddCarButton />
-              </div>
-              <CarList cars={carsState} />
-            </>
+            <CarList cars={carsState} />
           )}
         </div>
       </section>
@@ -120,7 +118,8 @@ class CarList extends React.Component<{ cars: Car[] }> {
             >
               <p className="flex items-center gap-2 text-xs text-ink-subtle">
                 <span className="accent-dot size-2.5 shrink-0 rounded-pill" aria-hidden="true" />
-                {car.color ?? "N/A"}
+                {/* I suppose this Icon is a temporary measure before a proper list is made TODO: DO */}
+                {car.color ?? "N/A"} <img className="button-icon inline mr-1" src={`https://www.google.com/s2/favicons?domain=${`https://${car.make}.com`}&sz=16`} alt="" />
               </p>
 
               {/*
@@ -143,7 +142,7 @@ class CarList extends React.Component<{ cars: Car[] }> {
   }
 }
 
-function AddCarButton() {
+function AddCarButton({ onCreated }: { onCreated: (car: Car) => void }) {
   const [open, setOpen] = useState(false)
 
   return (
@@ -171,7 +170,7 @@ function AddCarButton() {
         <span className="text-sm font-medium text-brand-900">Add Car</span>
       </button>
 
-      <AddCarDialog open={open} onClose={() => setOpen(false)} />
+      <AddCarDialog open={open} onClose={() => setOpen(false)} onCreated={onCreated} />
     </>
   )
 }

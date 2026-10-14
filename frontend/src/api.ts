@@ -55,6 +55,16 @@ export type Car = {
   maintenanceEntries: MaintenanceEntry[]
 }
 
+/** The writable half of a Car — mirrors CreateCarRequest.cs. */
+export type NewCar = {
+  make: string
+  model: string
+  year: number
+  color: string | null
+  vin: string | null
+  odometerReading: number
+}
+
 /**
  * One request returns every car with its maintenance entries embedded.
  * Throws on a non-2xx response: fetch only rejects on network failure.
@@ -72,15 +82,26 @@ export async function getCars(signal?: AbortSignal): Promise<Car[]> {
 export async function getCar(carId: string, signal?: AbortSignal): Promise<Car | null> {
   const response = await fetch(`/api/Car/${carId}`, { signal })
 
-  // The endpoint answers 404 for an unknown id. That's a legitimate "no such
-  // car" rather than a failure, so it becomes null — which is what this
-  // function's return type has always claimed.
   if (response.status === 404) {
     return null
   }
 
   if (!response.ok) {
     throw new Error(`GET /api/Car/${carId} failed: ${response.status} ${response.statusText}`)
+  }
+
+  return response.json()
+}
+
+export async function createCar(car: NewCar): Promise<Car> {
+  const response = await fetch("/api/Car", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(car),
+  })
+
+  if (!response.ok) {
+    throw new Error(`POST /api/Car failed: ${response.status} ${response.statusText}`)
   }
 
   return response.json()

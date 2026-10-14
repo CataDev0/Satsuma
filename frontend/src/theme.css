@@ -48,8 +48,8 @@
   --color-brand-800: #b44d12;
   --color-brand-900: #8d2b0b;
 
-  /* --- 2. Surfaces & ink --------------------------------------------------
-     Semantic names, not literal ones: "surface" is the card background in
+  /* --- Surfaces --------------------------------------------------
+     Semantic names, not literal ones: surface is the card background in
      whichever mode you are in. Use these in components so dark mode keeps
      working. */
   --color-canvas: light-dark(#f7f6f3, #131211);
@@ -63,12 +63,12 @@
   /* Backdrop behind a native <dialog>, styled below. */
   --color-scrim: light-dark(rgb(28 26 23 / 0.45), rgb(0 0 0 / 0.7));
 
-  /* --- 3. Shape & depth ------------------------------------------------- */
+  /* --- Shape & depth ------------------------------------------------- */
   --radius-card: 1rem;
   --radius-pill: 999px;
   --shadow-card: 0 1px 2px rgb(28 26 23 / 0.04), 0 12px 28px -18px rgb(28 26 23 / 0.35);
 
-  /* --- 4. Spacing --------------------------------------------------------
+  /* --- Spacing --------------------------------------------------------
      A named step or two keeps page rhythm consistent. Gutters and section
      gaps are here so the whole layout loosens or tightens from one place. */
   --spacing-gutter: 1.5rem;
@@ -106,11 +106,6 @@
   );
 }
 
-/* --- Modal scrim ---------------------------------------------------------
-   The backdrop of any native <dialog>. Tailwind v4 has no ::backdrop variant,
-   so this cannot be written as a utility class — a `backdrop:bg-*` in a
-   component is silently dropped. The --color-scrim token above keeps it in
-   the same re-skin surface as the rest of the palette. */
 dialog::backdrop {
   background-color: var(--color-scrim);
 }

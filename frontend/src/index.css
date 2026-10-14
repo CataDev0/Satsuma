@@ -49,7 +49,7 @@
     }
   }
 
-  /* The React logo is dark-on-transparent, so it needs inverting on dark
+  /* Dark artwork on a transparent background needs inverting on dark
    backgrounds. A filter isn't a colour, so it can't be a light-dark() pair —
    the selector gets written twice instead: once for the OS preference, once
    for an explicit toggle that overrides it. */
@@ -57,10 +57,23 @@
     :root:not(.light) #social .button-icon {
       filter: invert(1) brightness(2);
     }
+
+    /* satsuma-cyl.svg is pure #000, so invert(1) lands exactly on #fff — no
+       brightness() correction needed. Monochrome only: on coloured artwork
+       invert() flips the hues too (red becomes cyan), and you'd want
+       hue-rotate(180deg) alongside it — or better, inline the SVG so its fills
+       can be theme tokens. */
+    :root:not(.light) .hero .base {
+      filter: invert(1);
+    }
   }
 
   :root.dark #social .button-icon {
     filter: invert(1) brightness(2);
+  }
+
+  :root.dark .hero .base {
+    filter: invert(1);
   }
 
   #root {

@@ -94,6 +94,18 @@
         "name": "Eurodel",
         "url": "https://www.eurodel.no/",
         "icon": "https://www.google.com/s2/favicons?domain=eurodel.no&sz=64"
+      },
+      {
+        "name": "Autodoc (Phone recommended)",
+        "url": "https://autodoc.co.no/"
+      },
+      {
+        "name": "Mekonomen",
+        "url": "https://mekonomen.no"
+      },
+      {
+        "name": "Finn",
+        "url": "https://finn.no"
       }
     ]
   },

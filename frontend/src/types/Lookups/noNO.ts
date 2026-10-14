@@ -1,4 +1,4 @@
-export interface LookupResonse {
+export interface LookupResponse {
   kjoretoy: Kjoretoy;
   bruksforbud: boolean;
   antallTreff: number;
